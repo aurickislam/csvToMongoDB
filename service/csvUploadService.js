@@ -205,7 +205,7 @@ exports.uploadCSV = async (fileName, fileBuffer, clientId) => {
 					}
 
 					bulkCounter++;
-					if (bulkCounter == 50) {
+					if (bulkCounter == 2) {
 						console.log("Saving a batch");
 						bulkOp.execute(function (e, result) {
 							// do something with result
@@ -224,7 +224,7 @@ exports.uploadCSV = async (fileName, fileBuffer, clientId) => {
 						};
 
 						if (failedRows != 0)
-							uploadHistoryObj.failedRows = failedRowsStr;
+							uploadHistoryObj.failedCSV = failedRowsStr;
 
 						if (uploadHistoryId == undefined) {
 							// audienceUpload._id = new Mongo.Collection.ObjectID();
@@ -275,7 +275,7 @@ exports.uploadCSV = async (fileName, fileBuffer, clientId) => {
 				};
 
 				if (failedRows != 0)
-					uploadHistoryObj.failedRows = failedRowsStr;
+					uploadHistoryObj.failedCSV = failedRowsStr;
 
 				if (uploadHistoryId == undefined) {
 					// audienceUpload._id = new Mongo.Collection.ObjectID();
