@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>
+		CSV
+		upload</title>
+
+	<link href="css/plugins/bootstrap/bootstrap.min.css"
+		  rel="stylesheet">
+
+	<link href="css/uploadCSV.css"
+		  rel="stylesheet">
+
+
+	<script src="js/plugins/jquery/jquery-3.3.1.min.js"></script>
+	<script src="js/plugins/bootstrap/bootstrap.min.js"></script>
+	<script src="js/plugins/underscorejs/underscore-min.js"></script>
+	<script src="js/plugins/notifyjs/notify.min.js"></script>
+
+	<script src="js/uploadCSV.js"></script>
+</head>
+<body>
+
+<div class="container">
+	<div class="col-md-12 col-centered">
+
+		<div class="row" style="margin-top: 80px;">
+
+			<div class="input-group"
+				 style="border: 1px dashed rgb(153, 153, 153); padding: 8px; min-width: 560px; text-align: left;">
+				<span class="btn btn-primary">
+					<input id="csvFile"
+						   type="file"
+						   class="csvFile"
+						   accept=".csv">
+				</span>
+			</div>
+			<span class="audienceFileWarning" style="color: red; margin-left: 14px;"></span>
+
+			<div class="row row-centered" style="margin-top: 40px;">
+				<div class="col-sm-12 col-centered">
+					<button class="btn btn-primary upload"
+							style="width: 100%; cursor: pointer; display: inline-block;">
+						Upload
+					</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

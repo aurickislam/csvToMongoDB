@@ -1,0 +1,76 @@
+{
+	"validationRules": [
+		{
+			"column": "name",
+			"type": "string",
+			"required": true,
+			"unique": false,
+			"saveAs": ""
+		},
+		{
+			"column": "emailAddr",
+			"type": "email",
+			"required": true,
+			"unique": true,
+			"saveAs": "email"
+		},
+		{
+			"column": "age",
+			"type": "number",
+			"required": true
+		},
+		{
+			"column": "accountNumber",
+			"type": "string",
+			"required": true,
+			"length": 7
+		},
+		{
+			"column": "cifNumber",
+			"type": "number",
+			"required": true,
+			"unique": true
+		},
+		{
+			"column": "optedIn",
+			"type": "string",
+			"required": true,
+			"saveAs": {
+				"newColumn": "subscription",
+				"conditionValue": "true",
+				"ifTrue": true,
+				"ifFalse": false,
+				"default": true
+			}
+		},
+		{
+			"column": "zip",
+			"type": "number",
+			"required": false,
+			"saveAs": ""
+		},
+		{
+			"column": "city",
+			"type": "string",
+			"required": true,
+			"size": {
+				"max": 4,
+				"min": 20
+			}
+		}
+	],
+	"mongoDB": {
+		"databaseName": "uploadCSVDataToMongo",
+		"host": "127.0.0.1",
+		"port": 27017,
+		"username": "",
+		"password": "",
+		"collections": {
+			"mainCollection": "mainCollection",
+			"uploadHistory": "uploadHistory"
+		}
+	},
+	"serverPort": 8060,
+	"server": "http://127.0.0.1:8060/",
+	"developerMode": true
+}
