@@ -2,60 +2,59 @@
 	"validationRules": [
 		{
 			"column": "name",
-			"type": "string",
+			"type": "STRING",
 			"required": true,
 			"unique": false,
 			"saveAs": ""
 		},
 		{
 			"column": "emailAddr",
-			"type": "email",
+			"type": "EMAIL",
 			"required": true,
 			"unique": true,
 			"saveAs": "email"
 		},
 		{
 			"column": "age",
-			"type": "number",
+			"type": "NUMBER",
 			"required": true
 		},
 		{
 			"column": "accountNumber",
-			"type": "string",
+			"type": "STRING",
 			"required": true,
-			"length": 7
+			"size": 7
 		},
 		{
 			"column": "cifNumber",
-			"type": "number",
+			"type": "NUMBER",
 			"required": true,
 			"unique": true
 		},
 		{
 			"column": "optedIn",
-			"type": "string",
+			"type": "STRING",
 			"required": true,
 			"saveAs": {
 				"newColumn": "subscription",
 				"conditionValue": "true",
 				"ifTrue": true,
-				"ifFalse": false,
-				"default": true
+				"ifFalse": false
 			}
 		},
 		{
 			"column": "zip",
-			"type": "number",
+			"type": "NUMBER",
 			"required": false,
 			"saveAs": ""
 		},
 		{
 			"column": "city",
-			"type": "string",
+			"type": "STRING",
 			"required": true,
 			"size": {
-				"max": 4,
-				"min": 20
+				"min": 4,
+				"max": 20
 			}
 		}
 	],

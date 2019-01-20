@@ -75,7 +75,8 @@ exports.uploadCSV = async (fileName, fileBuffer, clientId) => {
 
 					if (!_.isUndefined(cellValue) && !_.isEmpty(cellValue)) {
 
-						if (validationRule.type == 'number') {
+						if (validationRule.type == 'NUMBER') {
+							console.log("@NUMBER");
 
 							if (!isNaN(cellValue)) {
 								cellValue = parseInt(cellValue);
@@ -83,30 +84,29 @@ exports.uploadCSV = async (fileName, fileBuffer, clientId) => {
 								failedReason.push('(' + column + ': ' + cellValue + ') must be a NUMBER');
 								isValid = false;
 							}
-						} else if (validationRule.type == 'email') {
+						} else if (validationRule.type == 'EMAIL') {
+							console.log("@EMAIL");
 
 							if (!utils.isEmailValid(cellValue)) {
 								failedReason.push('(' + column + ': ' + cellValue + ') is not a valid EMAIL');
 								isValid = false;
 							}
-						} else if (validationRule.type == 'string') {
-							console.log("@string");
+						} else if (_.isUndefined(validationRule.type) || _.isEmpty(validationRule.type) || validationRule.type == 'STRING') {
+							console.log("@STRING");
 
 							let size = validationRule.size;
 							console.log("@size", size);
 
-							if (!_.isUndefined(size) && !_.isEmpty(size)) {
+							if (!_.isUndefined(size) || !_.isEmpty(size)) {
 								console.log("@string with length");
 
-								size = +size;
-
-								if (!isNaN(size) && cellValue.length != size) {
+								if (!isNaN(size) && cellValue.length != +size) {
 									console.log("data length is not equal");
 
 									failedReason.push('(' + column + ': ' + cellValue + ') - length must be exact ' + size);
 									isValid = false;
 								} else if (typeof size == 'object') {
-									console.log("data length object");
+									console.log("length object");
 
 									let min = +size.min,
 										max = +size.max;

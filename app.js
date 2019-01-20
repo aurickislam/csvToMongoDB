@@ -1,9 +1,11 @@
-const express = require('express');
+const express = require('express'),
+	MongoClient = require('mongodb').MongoClient,
+	assert = require('assert');
 
 const app = express(),
 	config = require('./config');
 
-let indexRouter = require('./routes/indexRouter'),
+const indexRouter = require('./routes/indexRouter'),
 	csvUploadRouter = require('./routes/csvUploadRouter'),
 	validationRulesRouter = require('./routes/validationRulesRouter'),
 	uploadHistoryRouter = require('./routes/uploadHistoryRouter');
@@ -18,9 +20,6 @@ app.use('/csvUpload', csvUploadRouter.router);
 app.use('/validationRules', validationRulesRouter);
 app.use('/uploadHistory', uploadHistoryRouter.router);
 
-
-const MongoClient = require('mongodb').MongoClient,
-	assert = require('assert');
 
 // Database Name
 const databaseName = config.mongoDB.databaseName;

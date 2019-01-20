@@ -1,7 +1,7 @@
 {
   "name": "csvtomongodb",
   "version": "1.0.0",
-  "description": "It's a simple web application which takes CSV file as input. Validate the file according to given configuration. And convert each row to JSON and save those to mongoDb.",
+  "description": "It's a simple web application which takes CSV file as input, validate the file according to given configuration. Finally convert each row to JSON and save those to mongoDb.",
   "main": "index.js",
   "scripts": {
     "start": "node app"
