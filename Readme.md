@@ -5,65 +5,65 @@
 # Validation rules (config.json)
 
 ```json
-"validationRules": [
-		{
-			"column": "name",
-			"type": "STRING",
-			"required": true,
-			"unique": false,
-			"saveAs": ""
-		},
-		{
-			"column": "emailAddr",
-			"type": "EMAIL",
-			"required": true,
-			"unique": true,
-			"saveAs": "email"
-		},
-		{
-			"column": "age",
-			"type": "NUMBER",
-			"required": true
-		},
-		{
-			"column": "accountNumber",
-			"type": "STRING",
-			"required": true,
-			"size": 7
-		},
-		{
-			"column": "cifNumber",
-			"type": "NUMBER",
-			"required": true,
-			"unique": true
-		},
-		{
-			"column": "optedIn",
-			"type": "STRING",
-			"required": true,
-			"saveAs": {
-				"newColumn": "subscription",
-				"conditionValue": "true",
-				"ifTrue": "SUBSCRIBED",
-				"ifFalse": "UNSUBSCRIBED"
-			}
-		},
-		{
-			"column": "zip",
-			"type": "NUMBER",
-			"required": false,
-			"saveAs": ""
-		},
-		{
-			"column": "city",
-			"type": "STRING",
-			"required": true,
-			"size": {
-				"min": 4,
-				"max": 20
-			}
+[
+    {
+		"column": "name",
+		"type": "STRING",
+		"required": true,
+		"unique": false,
+		"saveAs": ""
+	},
+	{
+		"column": "emailAddr",
+		"type": "EMAIL",
+		"required": true,
+		"unique": true,
+		"saveAs": "email"
+	},
+	{
+		"column": "age",
+		"type": "NUMBER",
+		"required": true
+	},
+	{
+		"column": "accountNumber",
+		"type": "STRING",
+		"required": true,
+		"size": 7
+	},
+	{
+		"column": "cifNumber",
+		"type": "NUMBER",
+		"required": true,
+		"unique": true
+	},
+	{
+		"column": "optedIn",
+		"type": "STRING",
+		"required": true,
+		"saveAs": {
+			"newColumn": "subscription",
+			"conditionValue": "true",
+			"ifTrue": "SUBSCRIBED",
+			"ifFalse": "UNSUBSCRIBED"
 		}
-	]
+	},
+	{
+		"column": "zip",
+		"type": "NUMBER",
+		"required": false,
+		"saveAs": ""
+	},
+	{
+		"column": "city",
+		"type": "STRING",
+		"required": true,
+		"size": {
+			"min": 4,
+			"max": 20
+		}
+	}
+]
 ```
 
 Following parameters are supported:

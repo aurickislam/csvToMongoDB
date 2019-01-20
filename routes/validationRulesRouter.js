@@ -1,8 +1,7 @@
 const express = require('express'),
 	router = express.Router();
 
-const configuration = require('../config'),
-	csvUploadService = require('../service/csvUploadService');
+const configuration = require('../config');
 
 router.get('/getValidationRules', (req, res) => {
 	console.log("getValidationRules");
