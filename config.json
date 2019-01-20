@@ -58,6 +58,7 @@
 			}
 		}
 	],
+	"bulkSize": 2,
 	"mongoDB": {
 		"databaseName": "csvToMongoDB",
 		"host": "127.0.0.1",
@@ -70,6 +71,5 @@
 		}
 	},
 	"serverPort": 8060,
-	"server": "http://127.0.0.1:8060/",
-	"developerMode": true
+	"server": "http://127.0.0.1:8060/"
 }

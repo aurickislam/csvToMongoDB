@@ -1,7 +1,8 @@
 const _ = require('underscore'),
-	csvtojson = require('csvtojson/v2');
+	csvtojson = require('csvtojson/v2'),
+	ObjectID = require('mongodb').ObjectID;
 
-const configuration = require('../config'),
+const config = require('../config'),
 	utils = require('../utils/utils');
 
 let db;
@@ -28,16 +29,15 @@ function getUniqueColumns(validationRules) {
 	return uniqueColumns;
 }
 
-exports.uploadCSV = async (fileName, fileBuffer, clientId) => {
+exports.uploadCSV = async (fileName, fileBuffer, batchId) => {
 	console.log('@uploadCSV');
 
-	const mainCollection = db.collection(configuration.mongoDB.collections.mainCollection),
-		uploadHistory = db.collection(configuration.mongoDB.collections.uploadHistory);
+	const mainCollection = db.collection(config.mongoDB.collections.mainCollection),
+		uploadHistory = db.collection(config.mongoDB.collections.uploadHistory);
 
-	let validationRules = configuration.validationRules,
+	let validationRules = config.validationRules,
 		uniqueColumns = getUniqueColumns(validationRules),
-		audienceList = [], invalidRowList = [],
-		// audienceIdSet = new Set(),
+		newDocumentList = [], invalidRowList = [],
 		bulkOp = mainCollection.initializeUnorderedBulkOp(),
 		bulkCounter = 0, insertedRows = 0, updatedRows = 0, failedRows = 0,
 		failedRowsStr = '',
@@ -172,7 +172,7 @@ exports.uploadCSV = async (fileName, fileBuffer, clientId) => {
 				let filterOneByUnique = {};
 				if (!_.isUndefined(uniqueColumns)) {
 
-					filterOneByUnique.cid = clientId;
+					filterOneByUnique.batchId = batchId;
 					uniqueColumns.forEach(function (item) {
 						filterOneByUnique[item] = row[item];
 					});
@@ -180,32 +180,28 @@ exports.uploadCSV = async (fileName, fileBuffer, clientId) => {
 
 				console.log("@filterOneByUnique", filterOneByUnique);
 
-				if (!_.findWhere(audienceList, filterOneByUnique)) {
+				if (!_.findWhere(newDocumentList, filterOneByUnique)) {
 					console.log('@@Not found on bulk array');
 
-					audienceList.push(filterOneByUnique);
+					newDocumentList.push(filterOneByUnique);
 
-					let foundAudience = await mainCollection.findOne(filterOneByUnique);
+					let foundDocument = await mainCollection.findOne(filterOneByUnique);
 
-					console.log("@foundAudience");
-					console.log(foundAudience);
+					console.log("@foundDocument", foundDocument);
 
-					if (foundAudience != null) {
+					if (foundDocument != null) {
 						console.log('@@Found on database');
-						bulkOp.find({_id: foundAudience._id}).update({$set: row});
+						bulkOp.find({_id: foundDocument._id}).update({$set: row});
 						updatedRows++;
-						// audienceList.push(foundAudience._id);
 					} else {
 						console.log('@@Not found on database');
-						row.cid = clientId;
-						// audience._id = UUIDV1();
+						row.batchId = batchId;
 						bulkOp.insert(row);
 						insertedRows++;
-						// audienceList.push(audience._id);
 					}
 
 					bulkCounter++;
-					if (bulkCounter == 2) {
+					if (bulkCounter == config.bulkSize) {
 						console.log("Saving a batch");
 						bulkOp.execute(function (e, result) {
 							// do something with result
@@ -216,11 +212,11 @@ exports.uploadCSV = async (fileName, fileBuffer, clientId) => {
 						// Updating on audience upload
 						let uploadHistoryObj = {
 							fileName: fileName,
-							clientId: clientId,
+							batchId: batchId,
 							insertedRows: insertedRows,
 							updatedRows: updatedRows,
 							failedRows: failedRows,
-							status: "running"
+							status: "RUNNING"
 						};
 
 						if (failedRows != 0)
@@ -230,15 +226,15 @@ exports.uploadCSV = async (fileName, fileBuffer, clientId) => {
 							// audienceUpload._id = new Mongo.Collection.ObjectID();
 							uploadHistoryObj.createDate = new Date();
 
-							uploadHistoryId = await uploadHistory.insertOne(uploadHistoryObj).insertedId;
-							// future.return(audienceUploadId);
+							let uploadHistoryRes = await uploadHistory.insertOne(uploadHistoryObj);
+							uploadHistoryId = uploadHistoryRes.insertedId;
+
+							console.log('@uploadHistoryId', uploadHistoryId);
 						} else {
-							uploadHistory.updateOne(
-								{ _id: uploadHistoryId },
-								uploadHistoryObj, {upsert: true});
+							uploadHistory.updateOne({_id: ObjectID(uploadHistoryId)}, { $set: uploadHistoryObj }, {upsert: true});
 						}
 
-						audienceList = [];
+						newDocumentList = [];
 					}
 				} else {
 					console.log('@@Found on bulk array');
@@ -255,8 +251,6 @@ exports.uploadCSV = async (fileName, fileBuffer, clientId) => {
 		.on('done', async function (error) {
 			if (!error) {
 				console.log("@Processing finished");
-				// console.log("@audienceList", JSON.stringify(audienceList));
-				// console.log("@invalidAudienceList", invalidAudienceList);
 
 				if (bulkCounter != 0) {
 					bulkOp.execute(function (e, result) {
@@ -267,44 +261,38 @@ exports.uploadCSV = async (fileName, fileBuffer, clientId) => {
 
 				let uploadHistoryObj = {
 					fileName: fileName,
-					clientId: clientId,
+					batchId: batchId,
 					insertedRows: insertedRows,
 					updatedRows: updatedRows,
 					failedRows: failedRows,
-					status: "complete"
+					status: "COMPLETED"
 				};
 
 				if (failedRows != 0)
 					uploadHistoryObj.failedCSV = failedRowsStr;
 
 				if (uploadHistoryId == undefined) {
-					// audienceUpload._id = new Mongo.Collection.ObjectID();
 					uploadHistoryObj.createDate = new Date();
 
-					uploadHistoryId = await uploadHistory.insertOne(uploadHistoryObj).insertedId;
-					// future.return(audienceUploadId);
+					let uploadHistoryRes = await uploadHistory.insertOne(uploadHistoryObj);
+					uploadHistoryId = uploadHistoryRes.insertedId;
 				} else {
-					uploadHistory.updateOne(
-						{_id: uploadHistoryId},
-						uploadHistoryObj, {upsert: true});
+					uploadHistory.updateOne({_id: ObjectID(uploadHistoryId)}, { $set: uploadHistoryObj }, {upsert: true});
 				}
 			} else {
 				let uploadHistoryObj = {
 					fileName: fileName,
-					clientId: clientId,
+					batchId: batchId,
 					insertedRows: insertedRows,
 					updatedRows: updatedRows,
 					failedRows: failedRows,
-					status: "failed"
+					status: "FAILED"
 				};
 				if (uploadHistoryId == undefined) {
-					// audienceUpload._id = new Mongo.Collection.ObjectID();
-					uploadHistoryId = await uploadHistory.insertOne(uploadHistoryObj).insertedId;
-					// future.return(audienceUploadId);
+					let uploadHistoryRes = await uploadHistory.insertOne(uploadHistoryObj);
+					uploadHistoryId = uploadHistoryRes.insertedId;
 				} else {
-					uploadHistory.updateOne(
-						{_id: uploadHistoryId},
-						uploadHistoryObj, {upsert: true});
+					uploadHistory.updateOne({_id: ObjectID(uploadHistoryId)}, { $set: uploadHistoryObj }, {upsert: true});
 				}
 			}
 		});

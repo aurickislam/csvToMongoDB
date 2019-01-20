@@ -1,12 +1,12 @@
 const express = require('express'),
 	router = express.Router();
 
-const configuration = require('../config');
+const config = require('../config');
 
 router.get('/getValidationRules', (req, res) => {
 	console.log("getValidationRules");
 
-	res.send(configuration.validationRules);
+	res.send(config.validationRules);
 });
 
 module.exports = router;

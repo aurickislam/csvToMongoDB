@@ -1,5 +1,6 @@
 const express = require('express'),
-	router = express.Router();
+	router = express.Router(),
+	uuidv1 = require('uuid/v1');
 
 // const csvUploadService = require('../service/csvUploadService');
 let csvUploadService;
@@ -12,12 +13,14 @@ router.post('/upload', (req, res) => {
 	console.log("upload");
 
 	// console.log(req.body);
-
-	csvUploadService.uploadCSV(req.body.fileName, req.body.fileBuffer, "abcd");
+	let batchId = uuidv1();
+	csvUploadService.uploadCSV(req.body.fileName, req.body.fileBuffer, batchId);
 
 	console.log("Process done");
 
-	res.status(200).send("Seccess");
+	res.status(200).send({
+		batchId: batchId
+	});
 });
 
 module.exports = {

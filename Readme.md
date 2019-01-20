@@ -6,7 +6,7 @@
 
 ```json
 [
-    {
+	{
 		"column": "name",
 		"type": "STRING",
 		"required": true,
