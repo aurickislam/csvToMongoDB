@@ -1,0 +1,6 @@
+name,emailAddr,age,accountNumber,cifNumber,optedIn,zip,city
+Demo name1,demo.name1@csvtomongodb.com,23,1234561,1234561,TRUE,1204,New York
+Demo name2,demo.name2@csvtomongodb.com,23,1234562,1234562,TRUE,1204,New York
+Demo name3,demo.name3@csvtomongodb.com,23,1234563,1234563,TRUE,1204,New York
+Demo name4,demo.name4@csvtomongodb.com,23,1234564,1234564,TRUE,1204,California1531564s4daf654ds564f65
+Demo name5,demo.name5@csvtomongodb.com,23,1234565,1234565,TRUE,1204,California1
