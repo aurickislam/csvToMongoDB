@@ -1,6 +1,5 @@
 const express = require('express'),
-	MongoClient = require('mongodb').MongoClient,
-	assert = require('assert');
+	MongoClient = require('mongodb').MongoClient;
 
 const app = express(),
 	config = require('./config');
@@ -48,7 +47,6 @@ client.connect((err) => {
 	} else {
 		console.log("Failed to connect with MongoDB", err);
 	}
-	assert.equal(null, err);
 });
 
 
