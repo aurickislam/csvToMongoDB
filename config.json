@@ -37,7 +37,7 @@
 			"required": true,
 			"saveAs": {
 				"newColumn": "subscription",
-				"conditionValue": "true",
+				"conditionValue": "TRUE",
 				"ifTrue": true,
 				"ifFalse": false
 			}

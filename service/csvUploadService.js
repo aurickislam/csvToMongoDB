@@ -172,7 +172,7 @@ exports.uploadCSV = async (fileName, fileBuffer, batchId) => {
 				let filterOneByUnique = {};
 				if (!_.isUndefined(uniqueColumns)) {
 
-					filterOneByUnique.batchId = batchId;
+					// filterOneByUnique.batchId = batchId;
 					uniqueColumns.forEach(function (item) {
 						filterOneByUnique[item] = row[item];
 					});
@@ -191,6 +191,8 @@ exports.uploadCSV = async (fileName, fileBuffer, batchId) => {
 
 					if (foundDocument != null) {
 						console.log('@@Found on database');
+
+						row.batchId = batchId;
 						bulkOp.find({_id: foundDocument._id}).update({$set: row});
 						updatedRows++;
 					} else {
