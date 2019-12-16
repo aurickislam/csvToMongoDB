@@ -61,7 +61,7 @@
 	"bulkSize": 2,
 	"mongoDB": {
 		"databaseName": "csvToMongoDB",
-		"host": "192.168.88.16",
+		"host": "192.168.88.17",
 		"port": 27017,
 		"username": "",
 		"password": "",

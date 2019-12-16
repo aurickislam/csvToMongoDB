@@ -26,10 +26,11 @@ const databaseName = config.mongoDB.databaseName;
 // Connection URL
 const url = 'mongodb://' + config.mongoDB.host + ':' + config.mongoDB.port + '/' + databaseName;
 // const url = 'mongodb://aurick:aurick@' + config.mongoDB.host + ':' + config.mongoDB.port + '/' + databaseName;
-// const url = 'mongodb://aurick:aurick@localhost:27017/?authMechanism=DEFAULT&authSource=db';
+
+// const url = 'mongodb://192.168.88.16:27017,127.0.0.1:27017/csvToMongoDB?replicaSet=csvToMongoDB';
 
 // Create a new MongoClient
-const client = new MongoClient(url, {useNewUrlParser: true});
+const client = new MongoClient(url, {useNewUrlParser: true, useUnifiedTopology: true});
 
 // Use connect method to connect to the Server
 client.connect((err) => {
