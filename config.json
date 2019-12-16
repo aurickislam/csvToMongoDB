@@ -70,6 +70,5 @@
 			"uploadHistory": "uploadHistory"
 		}
 	},
-	"serverPort": 8060,
-	"server": "http://127.0.0.1:8060/"
+	"serverPort": 80
 }

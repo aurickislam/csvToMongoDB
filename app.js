@@ -43,7 +43,9 @@ client.connect((err) => {
 		initServises(db);
 
 		app.listen(config.serverPort, () => {
-			console.log('Server is running at : ' + config.server);
+			console.log('==============================');
+			console.log('Server is running at : ' + config.serverPort + " port");
+			console.log('==============================');
 		});
 	} else {
 		console.log("Failed to connect with MongoDB", err);
