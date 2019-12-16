@@ -19,7 +19,7 @@ function getUniqueColumns(validationRules) {
 
 		let saveAs = validationRule.saveAs;
 		if (validationRule.unique) {
-			if (!_.isUndefined(saveAs) && !_.isEmpty(saveAs))
+			if (!_.isUndefined(saveAs) && !_.isEmpty(saveAs) && saveAs != null)
 				uniqueColumns.push((typeof saveAs == 'object') ? saveAs.newColumn : saveAs);
 			else
 				uniqueColumns.push(validationRule.column);
@@ -126,7 +126,7 @@ exports.uploadCSV = async (fileName, fileBuffer, batchId) => {
 
 							console.log("@saveAs", saveAs);
 
-							if (!_.isUndefined(saveAs) && !_.isEmpty(saveAs)) {
+							if (!_.isUndefined(saveAs) && !_.isEmpty(saveAs) && saveAs != null) {
 
 								if (typeof saveAs == 'string') {
 									console.log("@saveAs string", saveAs);
