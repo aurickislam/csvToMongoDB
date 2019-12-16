@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+  csvtomongodb:
+    build:
+      context: .
+    image: csvToMongoDB:latest
+    container_name: csvToMongoDB
+    restart: always
+    ports:
+      - "8085:80"
