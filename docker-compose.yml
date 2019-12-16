@@ -1,10 +1,11 @@
 version: '3.7'
 
 services:
-  csvtomongodb:
+  csvToMongoDB:
     build:
       context: .
-    image: csvToMongoDB:latest
+      dockerfile: Dockerfile
+    image: csvtomongodb:latest
     container_name: csvToMongoDB
     restart: always
     ports:
