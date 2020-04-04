@@ -54,7 +54,7 @@ module.exports = {
 			required: true,
 			size: {
 				min: 4,
-				max: 20
+				max: 12
 			}
 		}
 	],
