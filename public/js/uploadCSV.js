@@ -5,7 +5,8 @@ $(function () {
 
 	$.ajax({
 		type: 'GET',
-		url: "/validationRules/getValidationRules",
+		// url: "/validationRules/getValidationRules",
+		url: "/validationRules",
 		timeout: 10000,
 		success: function (response, status, xhr) {
 			console.log("@response", response);

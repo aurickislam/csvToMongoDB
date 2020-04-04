@@ -4,9 +4,10 @@ const express = require('express'),
 
 let csvUploadService;
 
-function setCSVUploadService (_csvUploadService) {
+module.exports = ({_csvUploadService, _uploadHistoryService}) => {
 	csvUploadService = _csvUploadService;
-}
+	return router;
+};
 
 router.post('/upload', (req, res) => {
 	console.log("upload");
@@ -18,8 +19,3 @@ router.post('/upload', (req, res) => {
 		batchId: batchId
 	});
 });
-
-module.exports = {
-	router: router,
-	setCSVUploadService: setCSVUploadService
-};

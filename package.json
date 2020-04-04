@@ -9,11 +9,12 @@
   "author": "Md. Imadul Islam",
   "license": "ISC",
   "dependencies": {
+    "colors": "^1.4.0",
     "csvtojson": "^2.0.10",
     "express": "^4.17.1",
-    "mongodb": "^3.4.0",
+    "mongodb": "^3.5.5",
     "path": "^0.12.7",
-    "underscore": "^1.9.1",
-    "uuid": "^3.3.3"
+    "underscore": "^1.10.2",
+    "uuid": "^3.4.0"
   }
 }

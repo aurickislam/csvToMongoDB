@@ -1,12 +1,15 @@
-const config = require('../config');
+const config = require('../config'),
 
-let db;
+	_exports = {};
 
-exports.setDB = (database) => {
-	db = database;
+let database;
+
+module.exports = (db) => {
+	database = db;
+	return _exports;
 };
 
-exports.getUploadHistories = async function () {
-	const uploadHistory = db.collection(config.mongoDB.collections.uploadHistory);
+_exports.getUploadHistories = async _ => {
+	const uploadHistory = database.collection(config.mongoDB.collections.uploadHistory);
 	return await uploadHistory.find({}).toArray();
 };

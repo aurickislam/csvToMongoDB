@@ -3,10 +3,10 @@ const express = require('express'),
 
 const config = require('../config');
 
-router.get('/getValidationRules', (req, res) => {
+module.exports = router;
+
+router.get('/', (req, res) => {
 	console.log("getValidationRules");
 
 	res.send(config.validationRules);
 });
-
-module.exports = router;

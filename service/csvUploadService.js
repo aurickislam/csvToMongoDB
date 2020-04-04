@@ -1,14 +1,17 @@
 const _ = require('underscore'),
 	csvtojson = require('csvtojson/v2'),
-	ObjectID = require('mongodb').ObjectID;
+	ObjectID = require('mongodb').ObjectID,
 
-const config = require('../config'),
-	utils = require('../utils/utils');
+	config = require('../config'),
+	utils = require('../utils/utils'),
 
-let db;
+	_exports = {};
 
-exports.setDB = (database) => {
-	db = database;
+let database;
+
+module.exports = (db) => {
+	database = db;
+	return _exports;
 };
 
 function getUniqueColumns(validationRules) {
@@ -29,11 +32,11 @@ function getUniqueColumns(validationRules) {
 	return uniqueColumns;
 }
 
-exports.uploadCSV = async (fileName, fileBuffer, batchId) => {
+_exports.uploadCSV = async (fileName, fileBuffer, batchId) => {
 	console.log('@uploadCSV');
 
-	const mainCollection = db.collection(config.mongoDB.collections.mainCollection),
-		uploadHistory = db.collection(config.mongoDB.collections.uploadHistory);
+	const mainCollection = database.collection(config.mongoDB.collections.mainCollection),
+		uploadHistory = database.collection(config.mongoDB.collections.uploadHistory);
 
 	let validationRules = config.validationRules,
 		uniqueColumns = getUniqueColumns(validationRules),

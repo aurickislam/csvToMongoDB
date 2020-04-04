@@ -3,6 +3,8 @@ const express = require('express'),
 
 const router = express.Router();
 
+module.exports = router;
+
 /* GET home page. */
 router.get('/', (req, res) => {
 	// res.send("Hello world");
@@ -16,5 +18,3 @@ router.get('/', (req, res) => {
 		if (err) throw(err);
 	});
 });
-
-module.exports = router;
