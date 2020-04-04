@@ -1,8 +1,10 @@
 # CSVTOMONGODB
 
-`csvToMongoDB` is a simple node.js based web application which uploads CSV file, converts into JSON and store those in MongoDB. It maintains a configuration file for validate the CSV file's header and data. First, before uploading the selected CSV file from clients browser it validates the header. On server side each row is been converted into JSON, validated each cell's data according to configuration and finally those row JSON's are inserted or updated in MongoDB.
+`csvToMongoDB` is a simple node.js based web application which uploads CSV file, converts CSV rows into JSON object and store those in MongoDB. It maintains a configuration file for validate the CSV file's header and rows.
 
-# Validation rules (config.json)
+First, before uploading the selected CSV file from clients browser it validates the header. On server side each row is been converted into JSON, validated each cell's data according to configuration and finally those row JSON's are inserted or updated in MongoDB.
+
+# Validation rules (config.js)
 
 ```json
 [
