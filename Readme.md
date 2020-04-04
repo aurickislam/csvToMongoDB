@@ -109,54 +109,60 @@ Demo name5,demo.name5@csvtomongodb.com,26,1234565,1234565,TRUE,1204,California
 ```json
 [
     {
-        _id: ObjectId('5e88a03773d13e3b4c68170a'),
-        name: 'Demo name1',
-        age: 23,
-        accountNumber: '1234561',
-        cifNumber: 1234561,
-        zip: 1204,
-        city: 'New York',
-        email: 'demo.name1@csvtomongodb.com',
-        subscription: true,
-        batchId: '86a54480-7684-11ea-bf68-391e5e8263b4'
+        "_id": {
+            "$oid": "5e88bf03c3580b35782b9a20"
+        },
+        "name": "Demo name1",
+        "age": 23,
+        "accountNumber": "1234561",
+        "cifNumber": 1234561,
+        "zip": 1204,
+        "city": "New York",
+        "email": "demo.name1@csvtomongodb.com",
+        "subscription": true,
+        "batchId": "86a54480-7684-11ea-bf68-391e5e8263b4"
     },
     {
-        _id: ObjectId('5e88a03773d13e3b4c68170b'),
-        name: 'Demo name2',
-        age: 25,
-        accountNumber: '1234562',
-        cifNumber: 1234562,
-        zip: 1204,
-        city: 'New York',
-        email: 'demo.name2@csvtomongodb.com',
-        subscription: true,
-        batchId: '86a54480-7684-11ea-bf68-391e5e8263b4'
+        "_id": {
+            "$oid": "5e88bf03c3580b35782b9a21"
+        },
+        "name": "Demo name2",
+        "age": 25,
+        "accountNumber": "1234562",
+        "cifNumber": 1234562,
+        "zip": 1204,
+        "city": "New York",
+        "email": "demo.name2@csvtomongodb.com",
+        "subscription": true,
+        "batchId": "86a54480-7684-11ea-bf68-391e5e8263b4"
     },
-
     {
-        _id: ObjectId('5e88a03773d13e3b4c68170d'),
-        name: 'Demo name3',
-        age: 24,
-        accountNumber: '1234563',
-        cifNumber: 1234563,
-        zip: 1204,
-        city: 'New York',
-        email: 'demo.name3@csvtomongodb.com',
-        subscription: true,
-        batchId: '86a54480-7684-11ea-bf68-391e5e8263b4'
+        "_id": {
+            "$oid": "5e88bf03c3580b35782b9a23"
+        },
+        "name": "Demo name3",
+        "age": 24,
+        "accountNumber": "1234563",
+        "cifNumber": 1234563,
+        "zip": 1204,
+        "city": "New York",
+        "email": "demo.name3@csvtomongodb.com",
+        "subscription": true,
+        "batchId": "86a54480-7684-11ea-bf68-391e5e8263b4"
     },
-
     {
-        _id: ObjectId('5e88a03773d13e3b4c68170e'),
-        name: 'Demo name5',
-        age: 26,
-        accountNumber: '1234565',
-        cifNumber: 1234565,
-        zip: 1204,
-        city: 'California1',
-        email: 'demo.name5@csvtomongodb.com',
-        subscription: true,
-        batchId: '86a54480-7684-11ea-bf68-391e5e8263b4'
+        "_id": {
+            "$oid": "5e88bf03c3580b35782b9a24"
+        },
+        "name": "Demo name5",
+        "age": 26,
+        "accountNumber": "1234565",
+        "cifNumber": 1234565,
+        "zip": 1204,
+        "city": "California1",
+        "email": "demo.name5@csvtomongodb.com",
+        "subscription": true,
+        "batchId": "86a54480-7684-11ea-bf68-391e5e8263b4"
     }
 ]
 ```
