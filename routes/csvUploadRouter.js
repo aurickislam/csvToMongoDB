@@ -1,5 +1,4 @@
-const express = require('express'),
-	router = express.Router(),
+const router = require('express').Router(),
 	uuidv1 = require('uuid/v1');
 
 let csvUploadService;

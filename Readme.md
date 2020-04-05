@@ -68,7 +68,7 @@ First, before uploading the selected CSV file from clients browser it validates 
 ]
 ```
 
-Following parameters are supported:
+### Following parameters are supported:
 
 * **column (Required)**: Property `column` will contain a column name of CSV file. It should exist and match with CSV header.
 * **type**: This Property is used to validate the data type under this particular column. Currently supports `type: <STRING | NUMBER | EMAIL>`. If not provided or empty will considered as `STRING`.

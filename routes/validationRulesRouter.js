@@ -1,5 +1,4 @@
-const express = require('express'),
-	router = express.Router();
+const router = require('express').Router();
 
 const config = require('../config');
 

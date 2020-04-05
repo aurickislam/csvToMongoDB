@@ -13,6 +13,10 @@ app.use(express.static('public'));
 /** Create a new MongoClient */
 const client = new MongoClient(config.mongoDB.url, {useNewUrlParser: true, useUnifiedTopology: true});
 
+console.log('\n============================'.rainbow);
+console.log('Trying to connect with MongoDB'.magenta);
+console.log('============================\n'.rainbow);
+
 /** Use connect method to connect to the Server */
 client.connect((err) => {
 	if (!err) {
@@ -32,10 +36,13 @@ client.connect((err) => {
 		});
 	} else {
 		console.log("Failed to connect with MongoDB".red, err);
+		// process.exit(0);
 	}
 });
 
 function init(db) {
+	console.log("@init".green);
+
 	const services = {
 		_csvUploadService: require('./service/csvUploadService')(db),
 		_uploadHistoryService: require('./service/uploadHistoryService')(db)
