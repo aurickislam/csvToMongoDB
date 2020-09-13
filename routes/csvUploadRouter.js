@@ -1,5 +1,5 @@
 const router = require('express').Router(),
-	uuidv1 = require('uuid/v1');
+	{v4} = require('uuid');
 
 let csvUploadService;
 
@@ -11,7 +11,7 @@ module.exports = ({_csvUploadService, _uploadHistoryService}) => {
 router.post('/upload', (req, res) => {
 	console.log("upload");
 
-	let batchId = uuidv1();
+	let batchId = v4();
 	csvUploadService.uploadCSV(req.body.fileName, req.body.fileBuffer, batchId);
 
 	res.status(200).send({

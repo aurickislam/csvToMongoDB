@@ -13,9 +13,9 @@ app.use(express.static('public'));
 /** Create a new MongoClient */
 const client = new MongoClient(config.mongoDB.url, {useNewUrlParser: true, useUnifiedTopology: true});
 
-console.log('\n============================'.rainbow);
+console.log('\n=============================='.rainbow);
 console.log('Trying to connect with MongoDB'.magenta);
-console.log('============================\n'.rainbow);
+console.log('==============================\n'.rainbow);
 
 /** Use connect method to connect to the Server */
 client.connect((err) => {
@@ -31,7 +31,7 @@ client.connect((err) => {
 
 		app.listen(config.serverPort, () => {
 			console.log('\n============================='.rainbow);
-			console.log(`Server is running at :${config.serverPort} port`.cyan);
+			console.log(`Server is running at: ${config.serverPort} port`.cyan);
 			console.log('=============================\n'.rainbow);
 		});
 	} else {

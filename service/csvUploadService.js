@@ -247,7 +247,7 @@ _exports.uploadCSV = async (fileName, fileBuffer, batchId) => {
 
 				console.log("\n\n\n");
 			} else {
-				console.log("@this audience is not valid\n\n\n");
+				console.log("@this audience is not valid\n");
 				invalidRowList.push(row);
 				failedRows++;
 				failedRowsStr += rowCSVRow + ',' + failedReason.join(' || ') + '\n';
